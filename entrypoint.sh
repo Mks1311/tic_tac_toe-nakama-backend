@@ -9,4 +9,7 @@ echo "Running database migrations..."
 /nakama/nakama migrate up --database.address "$DATABASE_PUBLIC_URL"
 
 echo "Starting Nakama..."
-exec /nakama/nakama --config /nakama/data/local.yml --database.address "$DATABASE_PUBLIC_URL"
+exec /nakama/nakama \
+  --config /nakama/data/local.yml \
+  --database.address "$DATABASE_PUBLIC_URL" \
+  --socket.port ${PORT}
