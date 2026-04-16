@@ -1,59 +1,19 @@
 version: '3'
 services:
-  postgres:
-    command: postgres -c shared_preload_libraries=pg_stat_statements -c pg_stat_statements.track=all
-    environment:
-      - POSTGRES_DB=nakama
-      - POSTGRES_PASSWORD=localdb
-    expose:
-      - "8080"
-      - "5432"
-    image: postgres:12.2-alpine
-    ports:
-      - "5432:5432"
-      - "8080:8080"
-    volumes:
-      - data:/var/lib/postgresql/data
-
-  # NEW: watches your src/ and recompiles on change
-  builder:
-    image: node:alpine
-    working_dir: /backend
-    volumes:
-      - ./:/backend          # your entire backend folder
-      - ./build:/backend/build  # shared build output
-    command: sh -c "npm install && npm run watch"
-
   nakama:
-    image: registry.heroiclabs.com/heroiclabs/nakama:3.22.0  # use image, not build
-    depends_on:
-      - postgres
-      - builder
+    image: registry.heroiclabs.com/heroiclabs/nakama:3.22.0
     entrypoint:
       - "/bin/sh"
       - "-ecx"
       - >
-        /nakama/nakama migrate up --database.address postgres:localdb@postgres:5432/nakama &&
-        exec /nakama/nakama --config /nakama/data/local.yml --database.address postgres:localdb@postgres:5432/nakama
+        /nakama/nakama migrate up --database.address ${DATABASE_URL} &&
+        exec /nakama/nakama --config /nakama/data/local.yml
+        --database.address ${DATABASE_URL}
     volumes:
-      - ./build:/nakama/data/modules/build  # mount compiled output directly
+      - ./build:/nakama/data/modules/build
       - ./local.yml:/nakama/data/local.yml
-    expose:
-      - "7349"
-      - "7350"
-      - "7351"
-    healthcheck:
-      test: ["CMD", "/nakama/nakama", "healthcheck"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    links:
-      - "postgres:db"
     ports:
-      - "7349:7349"
       - "7350:7350"
       - "7351:7351"
+      - "7349:7349"
     restart: unless-stopped
-
-volumes:
-  data:
