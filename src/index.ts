@@ -6,7 +6,7 @@
 
 import { rpcHealthCheck } from "./rpc/health";
 import { rpcCreateMatch } from "./rpc/createMatch";
-import { rpcFindMatch } from "./rpc/findMatch";
+import { rpcJoinPrivateRoom } from "./rpc/joinPrivateRoom";
 import {
   matchInit,
   matchJoinAttempt,
@@ -27,7 +27,7 @@ function InitModule(
 
   initializer.registerRpc("rpc_healthcheck", rpcHealthCheck);
   initializer.registerRpc("rpc_create_match", rpcCreateMatch);
-  initializer.registerRpc("rpc_find_match", rpcFindMatch);
+  initializer.registerRpc("rpc_join_private_room", rpcJoinPrivateRoom);
 
   initializer.registerMatch(MATCH_MODULE, {
     matchInit: matchInit,
@@ -65,5 +65,6 @@ function matchmakerMatched(
 }
 
 // Ensure InitModule is visible to the Nakama runtime at the global scope
-// (this is required for the bundled output)
-!globalThis.InitModule && (globalThis.InitModule = InitModule);
+// (this is required for the bundled output — Goja reads it from globalThis)
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+!(globalThis as any).InitModule && ((globalThis as any).InitModule = InitModule);

@@ -34,3 +34,9 @@ export const MATCHMAKER_QUERY = "*";
 
 /** Match module name */
 export const MATCH_MODULE = "tic_tac_toe";
+
+/** Nakama Storage collection for private room codes */
+export const ROOM_CODE_COLLECTION = "private_rooms";
+
+/** Nakama system/admin user ID (all zeros) used for server-owned storage records */
+export const SYSTEM_USER_ID = "00000000-0000-0000-0000-000000000000";
