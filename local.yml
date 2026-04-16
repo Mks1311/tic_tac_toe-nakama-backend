@@ -1,11 +1,26 @@
-console:
-  max_message_size_bytes: 409600
+name: "nakama"
+data_dir: "/nakama/data"
+
 logger:
-  level: "DEBUG"
+  level: "INFO"
+
 runtime:
   js_entrypoint: "build/index.js"
+
 session:
-  token_expiry_sec: 7200 # 2 hours
+  token_expiry_sec: 7200
+
 socket:
-  max_message_size_bytes: 4096 # reserved buffer
+  address: "0.0.0.0"
+  port: 7350
+  max_message_size_bytes: 4096
   max_request_size_bytes: 131072
+
+console:
+  address: "0.0.0.0"
+  port: 7351
+  max_message_size_bytes: 409600
+
+database:
+  address:
+    - "${DATABASE_URL}"
