@@ -1,0 +1,102 @@
+# =========================
+
+# Node / TypeScript
+
+# =========================
+
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build output
+
+dist/
+build/
+out/
+*.tsbuildinfo
+
+# TypeScript cache
+
+*.log
+
+# =========================
+
+# Environment files
+
+# =========================
+
+.env
+.env.*
+!.env.example
+
+# =========================
+
+# Docker
+
+# =========================
+
+.dockerignore
+docker-compose.override.yml
+
+# Docker volumes / temp data
+
+*.tar
+*.log
+tmp/
+temp/
+
+# =========================
+
+# Nakama specific (if applicable)
+
+# =========================
+
+# Compiled JS (if using ts -> js build)
+
+build/
+modules/
+
+# Local database / runtime files
+
+data/
+*.db
+*.sqlite
+
+# =========================
+
+# OS / Editor
+
+# =========================
+
+.DS_Store
+Thumbs.db
+
+# VS Code
+
+.vscode/
+!.vscode/extensions.json
+
+# JetBrains
+
+.idea/
+
+# =========================
+
+# Testing
+
+# =========================
+
+coverage/
+.nyc_output/
+
+# =========================
+
+# Misc
+
+# =========================
+
+*.swp
+*.swo
+*~
