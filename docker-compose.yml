@@ -6,9 +6,9 @@ services:
       - "/bin/sh"
       - "-ecx"
       - >
-        /nakama/nakama migrate up --database.address ${DATABASE_PUBLIC_URL} &&
+        /nakama/nakama migrate up --database.address postgresql://postgres:nEKUnIHUOpdnOdmzwJlfgNuakeBamFNN@nozomi.proxy.rlwy.net:50451/railway &&
         exec /nakama/nakama --config /nakama/data/local.yml
-        --database.address ${DATABASE_PUBLIC_URL}
+        --database.address postgresql://postgres:nEKUnIHUOpdnOdmzwJlfgNuakeBamFNN@nozomi.proxy.rlwy.net:50451/railway
     volumes:
       - ./build:/nakama/data/modules/build
       - ./local.yml:/nakama/data/local.yml
