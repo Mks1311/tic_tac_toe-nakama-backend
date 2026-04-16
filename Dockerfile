@@ -14,3 +14,9 @@ FROM registry.heroiclabs.com/heroiclabs/nakama:3.22.0
 
 COPY --from=node-builder /backend/build/index.js /nakama/data/modules/build/index.js
 COPY local.yml /nakama/data/
+COPY entrypoint.sh /nakama/entrypoint.sh
+
+USER root
+RUN chmod +x /nakama/entrypoint.sh
+
+ENTRYPOINT ["/nakama/entrypoint.sh"]
