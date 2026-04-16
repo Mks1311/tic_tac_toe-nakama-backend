@@ -6,9 +6,9 @@ services:
       - "/bin/sh"
       - "-ecx"
       - >
-        /nakama/nakama migrate up --database.address ${DATABASE_URL} &&
+        /nakama/nakama migrate up --database.address ${DATABASE_PUBLIC_URL} &&
         exec /nakama/nakama --config /nakama/data/local.yml
-        --database.address ${DATABASE_URL}
+        --database.address ${DATABASE_PUBLIC_URL}
     volumes:
       - ./build:/nakama/data/modules/build
       - ./local.yml:/nakama/data/local.yml

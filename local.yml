@@ -23,4 +23,4 @@ console:
 
 database:
   address:
-    - "${DATABASE_URL}"
+    - "${DATABASE_PUBLIC_URL}"
